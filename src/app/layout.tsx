@@ -11,7 +11,7 @@ const notoSansJP = Noto_Sans_JP({
 
 export const metadata: Metadata = {
   title: '暇つぶし #13',
-  description: '最終更新: 2024-05-13',
+  description: '最終更新: 2023-05-13',
   keywords: '',
   authors: [{ name: 'yuta' }],
 };
