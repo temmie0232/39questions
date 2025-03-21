@@ -5,8 +5,8 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: '36の質問ゲーム',
-  description: '二人の人が互いをより深く知るための36の質問ゲーム',
+  title: '暇つぶし #4',
+  description: '最終更新: 2024-09-15',
 };
 
 export default function RootLayout({
