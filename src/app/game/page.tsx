@@ -39,7 +39,7 @@ export default function Game() {
     const swipeHandlers = useSwipeable({
         onSwipedLeft: () => goToNextQuestion(),
         onSwipedRight: () => goToPreviousQuestion(),
-        preventDefaultTouchmoveEvent: true,
+        preventScrollOnSwipe: true,
         trackMouse: false
     });
 
