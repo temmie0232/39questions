@@ -1,12 +1,19 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Noto_Sans_JP } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const notoSansJP = Noto_Sans_JP({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  display: 'swap',
+  variable: '--font-noto-sans-jp',
+});
 
 export const metadata: Metadata = {
-  title: '暇つぶし #4',
-  description: '最終更新: 2024-09-15',
+  title: '暇つぶし #13',
+  description: '最終更新: 2024-05-13',
+  keywords: '',
+  authors: [{ name: 'yuta' }],
 };
 
 export default function RootLayout({
@@ -15,8 +22,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja">
-      <body className={inter.className}>{children}</body>
+    <html lang="ja" className={notoSansJP.variable}>
+      <body className={notoSansJP.className}>
+        <main>{children}</main>
+      </body>
     </html>
   );
 }

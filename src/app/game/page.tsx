@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import { motion, AnimatePresence } from 'framer-motion';
 import { questions } from '@/data/questions';
+import Link from 'next/link';
 
 export default function Game() {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -63,77 +64,133 @@ export default function Game() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen p-4 pb-24 bg-gradient-to-b from-indigo-100 to-purple-100">
-            <div className="mb-6 text-center">
-                <h1 className="text-2xl font-bold text-indigo-800">Questions</h1>
+        <div className="flex flex-col items-center justify-center min-h-screen p-4 pb-24 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+            <motion.div
+                className="flex items-center justify-between w-full max-w-md mb-8"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+            >
+                <Link href="/" className="flex items-center text-indigo-600 transition-colors hover:text-indigo-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 111.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+                    </svg>
+                    ホームへ
+                </Link>
+
                 {!isRuleCard && (
-                    <p className="mt-2 text-gray-600">
-                        質問 {currentQuestionIndex + 1} / {questions.length}
-                    </p>
+                    <div className="flex items-center justify-center px-3 py-1 text-sm font-medium text-indigo-700 bg-indigo-100 rounded-full">
+                        {currentQuestionIndex + 1} / {questions.length}
+                    </div>
                 )}
-            </div>
+            </motion.div>
 
             <div
                 {...swipeHandlers}
-                className="w-full max-w-md"
+                className="w-full max-w-md perspective"
             >
-                <AnimatePresence initial={false} custom={direction} mode="wait">
-                    <motion.div
-                        key={isRuleCard ? 'rules' : currentQuestionIndex}
-                        custom={direction}
-                        variants={variants}
-                        initial="enter"
-                        animate="center"
-                        exit="exit"
-                        transition={{
-                            x: { type: 'spring', stiffness: 300, damping: 30 },
-                            opacity: { duration: 0.2 }
-                        }}
-                        className="p-6 bg-white rounded-xl shadow-lg"
-                        style={{ minHeight: '200px' }}
-                    >
-                        {isRuleCard ? (
-                            <div>
-                                <h2 className="mb-4 text-xl font-semibold text-indigo-700">ルール</h2>
-                                <ul className="ml-5 list-disc text-gray-700">
-                                    <li className="mb-2">1題ずつ、交代に質問を読みあげる</li>
-                                    <li className="mb-2">質問を読み上げた方が、先に回答。その後に、もう1人が回答する</li>
-                                    <li className="mb-2">質問を飛ばしてはならない</li>
-                                </ul>
-                                <div className="mt-6 text-sm text-center text-gray-500">
-                                    スワイプして質問を始める
+                <div className="relative" style={{ minHeight: '280px' }}>
+                    <AnimatePresence initial={false} custom={direction} mode="wait">
+                        <motion.div
+                            key={isRuleCard ? 'rules' : currentQuestionIndex}
+                            custom={direction}
+                            variants={variants}
+                            initial="enter"
+                            animate="center"
+                            exit="exit"
+                            transition={{
+                                x: { type: 'spring', stiffness: 300, damping: 30 },
+                                opacity: { duration: 0.2 }
+                            }}
+                            className="absolute inset-0 p-8 bg-white rounded-2xl shadow-lg shadow-indigo-100/50 border border-indigo-50"
+                        >
+                            {isRuleCard ? (
+                                <div>
+                                    <h2 className="mb-6 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">ルール</h2>
+                                    <ul className="space-y-4 text-gray-700">
+                                        <li className="flex items-center">
+                                            <span className="flex items-center justify-center w-6 h-6 mr-3 text-xs font-bold text-white bg-indigo-600 rounded-full">1</span>
+                                            1題ずつ、交代に質問を読みあげる
+                                        </li>
+                                        <li className="flex items-center">
+                                            <span className="flex items-center justify-center w-6 h-6 mr-3 text-xs font-bold text-white bg-indigo-600 rounded-full">2</span>
+                                            質問を読み上げた方が、先に回答。その後に、もう1人が回答する
+                                        </li>
+                                        <li className="flex items-center">
+                                            <span className="flex items-center justify-center w-6 h-6 mr-3 text-xs font-bold text-white bg-indigo-600 rounded-full">3</span>
+                                            質問を飛ばしてはならない
+                                        </li>
+                                    </ul>
+                                    <motion.div
+                                        className="flex items-center justify-center mt-8 text-sm text-indigo-500"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ delay: 0.5, duration: 0.5 }}
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mr-2 animate-pulse" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                        </svg>
+                                        スライドして質問を始める
+                                    </motion.div>
                                 </div>
-                            </div>
-                        ) : (
-                            <div>
-                                <h2 className="mb-4 text-xl font-semibold text-indigo-700">Q{currentQuestionIndex + 1}</h2>
-                                <p className="text-xl font-medium text-gray-800">{questions[currentQuestionIndex]}</p>
-                                <div className="flex justify-between mt-6 text-sm text-gray-500">
-                                    <span>← 前の質問</span>
-                                    <span>次の質問 →</span>
+                            ) : (
+                                <div className="flex flex-col h-full">
+                                    <div className="flex items-center mb-6">
+                                        <span className="inline-flex items-center justify-center w-8 h-8 mr-3 text-sm font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full">
+                                            {currentQuestionIndex + 1}
+                                        </span>
+                                        <div className="h-px flex-grow bg-gradient-to-r from-indigo-200 to-purple-200"></div>
+                                    </div>
+                                    <p className="flex-grow text-xl font-medium leading-relaxed text-gray-800">
+                                        {questions[currentQuestionIndex]}
+                                    </p>
+                                    <div className="flex justify-between mt-6 text-sm text-indigo-500">
+                                        <motion.span
+                                            whileHover={{ x: -3 }}
+                                            className="flex items-center cursor-pointer"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                                            </svg>
+                                            前の質問
+                                        </motion.span>
+                                        <motion.span
+                                            whileHover={{ x: 3 }}
+                                            className="flex items-center cursor-pointer"
+                                        >
+                                            次の質問
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                            </svg>
+                                        </motion.span>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
-                    </motion.div>
-                </AnimatePresence>
+                            )}
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
             </div>
 
-            <div className="fixed bottom-0 left-0 right-0 flex justify-center p-4 bg-white bg-opacity-90 border-t border-gray-200 shadow-lg">
-                <div className="flex space-x-4 max-w-md w-full">
-                    <button
+            <div className="fixed bottom-0 left-0 right-0 py-5 bg-white border-t border-indigo-100 shadow-lg">
+                <div className="flex justify-center px-4 mx-auto max-w-md">
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={goToPreviousQuestion}
                         disabled={isRuleCard && currentQuestionIndex === 0}
-                        className="w-1/2 px-4 py-3 text-indigo-600 transition-colors duration-300 bg-white rounded-lg shadow hover:bg-indigo-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-1/2 px-6 py-3 mr-3 font-medium text-indigo-600 transition-all duration-300 bg-indigo-50 rounded-xl hover:bg-indigo-100 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         前へ
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={goToNextQuestion}
                         disabled={!isRuleCard && currentQuestionIndex === questions.length - 1}
-                        className="w-1/2 px-4 py-3 text-white transition-colors duration-300 bg-indigo-600 rounded-lg shadow hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-1/2 px-6 py-3 font-medium text-white transition-all duration-300 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         次へ
-                    </button>
+                    </motion.button>
                 </div>
             </div>
         </div>
