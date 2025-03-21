@@ -17,7 +17,7 @@ export default function Home() {
           <span className="inline-block ml-2 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Questions</span>
         </h1>
         <p className="mb-12 text-lg text-center text-indigo-700/80 max-w-md">
-          やってみよ
+          んんんんん
         </p>
         <motion.div
           whileHover={{ scale: 1.05 }}
