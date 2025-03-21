@@ -65,7 +65,7 @@ export default function Game() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-4 pb-24 bg-gradient-to-b from-indigo-100 to-purple-100">
             <div className="mb-6 text-center">
-                <h1 className="text-2xl font-bold text-indigo-800">36の質問ゲーム</h1>
+                <h1 className="text-2xl font-bold text-indigo-800">Questions</h1>
                 {!isRuleCard && (
                     <p className="mt-2 text-gray-600">
                         質問 {currentQuestionIndex + 1} / {questions.length}
