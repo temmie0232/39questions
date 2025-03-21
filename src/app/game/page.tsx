@@ -44,7 +44,7 @@ export default function Game() {
     });
 
     const variants = {
-        enter: (direction) => {
+        enter: (direction: number) => {
             return {
                 x: direction > 0 ? 1000 : -1000,
                 opacity: 0
@@ -54,7 +54,7 @@ export default function Game() {
             x: 0,
             opacity: 1
         },
-        exit: (direction) => {
+        exit: (direction: number) => {
             return {
                 x: direction < 0 ? 1000 : -1000,
                 opacity: 0
@@ -101,7 +101,7 @@ export default function Game() {
                                     <li className="mb-2">質問を飛ばしてはならない</li>
                                 </ul>
                                 <div className="mt-6 text-sm text-center text-gray-500">
-                                    右にスワイプして質問を始める
+                                    スワイプして質問を始める
                                 </div>
                             </div>
                         ) : (
